@@ -6,7 +6,7 @@ stream@threeoh.com
 
 
 /* Generics */
-BODY { font:9px verdana, arial, san-serif; }
+BODY { font:9px verdana, arial, san-serif; margin:2em 2.5em; }
 A {color: #3399CC; text-decoration:none}
 A:hover {color: #FF0066}
 A:visited {color: #999999}

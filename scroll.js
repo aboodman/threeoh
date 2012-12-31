@@ -13,10 +13,6 @@ ThreeOhScroll.pc = navigator.platform == "Win32"
 // you set the number of pixels that the desc tag will be permanently.
 ThreeOhScroll.ie4pcDescWidth = 100
 
-// i have no idea why this number is necessary, it just is. it is related to how far the scroller is from the top of the window
-// in mozilla, but you will have to play with it to get it just right.
-ThreeOhScroll.mozAdjust = ThreeOhScroll.mo5 ? 75 : 0
-
 // this is how long it should take the scroller to animate when the user clicks a marker (in milliseconds)
 ThreeOhScroll.aniLen = 250
 
@@ -32,13 +28,13 @@ function ThreeOhScroll(id)
 		this.clipH		= parseInt(this.container.style.height)
 		this.PTags		= ypGetDescendantsByTagName("P", this.content)
 		var lastP		= this.PTags[this.PTags.length-1]
-		var lastPTop	= lastP.offsetTop - ThreeOhScroll.mozAdjust
+	        var lastPTop	= lastP.offsetTop;
 		this.docH		= lastPTop + Math.max(lastP.offsetHeight, this.clipH)
 		this.scrollH	= this.docH - this.clipH
 		this.markersMax	= parseInt(this.markers.style.height) - 7
 		this.thumbMax	= parseInt(this.thumbContainer.style.height) - this.thumbImg.height
 		this.arrowMax	= parseInt(this.arrowContainer.style.height) - this.arrowImg.height
-		
+
 		this.gRef = "ThreeOhScroll_"+id
 		eval(this.gRef+"=this")
 		this.thumb.obj	= this
@@ -57,14 +53,14 @@ ThreeOhScroll.prototype.initMarkers = function() {
 	var shtml = "", sTitle, iTop
 	for (var i = 0; i < this.PTags.length; i++) {
 		sTitle	= this.PTags[i].getAttribute("description")
-		pTop	= this.PTags[i].offsetTop - ThreeOhScroll.mozAdjust
+	        pTop	= this.PTags[i].offsetTop;
 		iTop	= Math.round(pTop * this.markersMax / this.scrollH)
 		if (sTitle && sTitle != "" && sTitle != null) {
 			shtml  += "<div id='" + this.id + "_marker_" + i + "' "
 			shtml  += "style='position:absolute; left:2px; top:" + (iTop + 2) + "px; "
 			shtml  += "width:5px; height:3px; clip:rect(0 5 3 0); background-color:#CCCCCC; z-index:3;'></div>"
 			shtml  += "<div style='position:absolute; left:0px; top:" + iTop + "px; "
-			shtml  += "cursor:pointer; cursor:hand; width:9px; height:7px; clip:rect(0 9 7 0); z-index:4;' " 
+			shtml  += "cursor:pointer; cursor:hand; width:9px; height:7px; clip:rect(0 9 7 0); z-index:4;' "
 			shtml  += "onmousedown='" + this.gRef + ".scrollTo(" + pTop + ")' "
 			shtml  += "onmouseover='" + this.gRef + ".toggleMarker(this, " + i + ", 1)' "
 			shtml  += "onmouseout='" + this.gRef + ".toggleMarker(this, " + i + ", 0)' "
